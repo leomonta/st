@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat include/config.def.h > include/include.h
+cat include/config.def.h > include/config.h
 
 rm bin/st
 
