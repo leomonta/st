@@ -1,4 +1,5 @@
 *.rej
 *.orig
 *.o
+files_hash.txt
 
