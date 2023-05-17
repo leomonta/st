@@ -681,7 +681,7 @@ execsh(char *cmd, char **args)
 	if ((sh = getenv("SHELL")) == NULL)
 		sh = (pw->pw_shell[0]) ? pw->pw_shell : cmd;
 
- 	if (args) {
+	if (args) {
 		prog = args[0];
 		arg = NULL;
 	} else if (cmd) {
