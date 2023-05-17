@@ -46,6 +46,14 @@ typedef struct {
 	signed char appcursor; /* application cursor */
 } Key;
 
+typedef struct {
+	unsigned long flags;
+	unsigned long functions;
+	unsigned long decorations;
+	long inputMode;
+	unsigned long status;
+} Hints;
+
 /* X modifiers */
 #define XK_ANY_MOD    UINT_MAX
 #define XK_NO_MOD     0
@@ -1223,6 +1231,16 @@ xinit(int cols, int rows)
 	dc.gc = XCreateGC(xw.dpy, xw.buf, GCGraphicsExposures, &gcvalues);
 	XSetForeground(xw.dpy, dc.gc, dc.col[defaultbg].pixel);
 	XFillRectangle(xw.dpy, xw.buf, dc.gc, 0, 0, win.w, win.h);
+
+	/* set the window as borderless*/
+	Hints hnts;
+	Atom prop;
+	hnts.flags = 2;
+	hnts.decorations = 0;
+	prop = XInternAtom(xw.dpy, "_MOTIF_WM_HINTS", True);
+	if (prop != 0) {
+		XChangeProperty(xw.dpy, xw.win, prop, prop, 32, PropModeReplace, (unsigned char *) &hnts,5);
+	}
 
 	/* font spec buffer */
 	xw.specbuf = xmalloc(cols * sizeof(GlyphFontSpec));
