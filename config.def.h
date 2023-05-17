@@ -205,7 +205,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ ShiftMask,			XK_Page_Up,		kscrollup,		{.i = -1} },
-	{ ShiftMask,			XK_Page_Down,	kscrollup,		{.i = -1} },
+	{ ShiftMask,			XK_Page_Down,	kscrolldown,	{.i = -1} },
 	{ XK_NO_MOD,            XK_F11,         fullscreen,     {.i =  0} },
 	{ MODKEY,               XK_Return,      fullscreen,     {.i =  0} },
 };
