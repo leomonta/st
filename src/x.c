@@ -19,7 +19,9 @@ char *argv0;
 #include "arg.h"
 #include "st.h"
 #include "win.h"
-#include "hb.h"
+#include "hhb.h"
+#define str(a) #a
+#define VERSION str(VER)
 
 /* types used in config.h */
 typedef struct {

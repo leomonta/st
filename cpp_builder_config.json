@@ -1,0 +1,59 @@
+{
+	"scripts": {
+		"pre": "clean_and_setup.sh",
+		"post": "install.sh"
+	},
+	"compiler": {
+		"compiler_style": "gcc",
+		"compiler_exe": "gcc",
+		"linker_exe": "gcc"
+	},
+	
+	"directories": {
+		"project_dir": ".",
+		"exe_path_name": "bin/st",
+		"include_dirs": [
+			"include",
+			"/usr/X11R6/include",
+			"/usr/include/freetype2",
+			"/usr/include/libpng16",
+			"/usr/include/harfbuzz",
+			"/usr/include/glib-2.0",
+			"/usr/lib/glib-2.0/include",
+			"/usr/include/sysprof-4"
+		],
+		"source_dirs": [
+			"src"
+		],
+		"temp_dir": "obj"
+	},
+
+	"debug": {
+		"compiler_args": "-g3 -std=c++2a -Wno-missing-field-initializers -Wno-unknown-pragmas -Wall -Wconversion -Wshadow -Wextra -fsanitize=address -fsanitize=leak",
+		"linker_args": "",
+		"libraries_dirs": [
+			"/usr/X11R6/lib"
+		],
+		"libraries_names": [
+			"m",
+			"rt",
+			"X11",
+			"util",
+			"Xft",
+			"Xrender",
+			"fontconfig",
+			"freetype",
+			"harfbuzz"
+		]
+
+	},
+
+	"release": {
+		"compiler_args": "-DVER=0.9 -D_XOPEN_SOURCE=600 -Ofast",
+		"linker_args": "",
+		"libraries_dirs": [
+		],
+		"libraries_names": [
+		]
+	}
+}

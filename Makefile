@@ -5,7 +5,7 @@
 include config.mk
 
 SRC = st.c x.c hb.c
-OBJ = $(SRC:.c=.o)
+OBJ = obj/st.c
 
 all: options st
 
@@ -19,7 +19,7 @@ config.h:
 	cp config.def.h config.h
 
 .c.o:
-	$(CC) $(STCFLAGS) -c $<
+	$(CC) $(STCFLAGS) -c src/$< -o obj/$@
 
 st.o: config.h st.h win.h
 x.o: arg.h config.h st.h win.h hb.h
@@ -28,10 +28,10 @@ hb.o: st.h
 $(OBJ): config.h config.mk
 
 st: $(OBJ)
-	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
+	$(CC) -o bin/$@ $(OBJ) $(STLDFLAGS)
 
 clean:
-	rm -f st $(OBJ) st-$(VERSION).tar.gz
+	rm -f bin/st $(OBJ) st-$(VERSION).tar.gz
 
 dist: clean
 	mkdir -p st-$(VERSION)
