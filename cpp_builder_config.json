@@ -14,7 +14,6 @@
 		"exe_path_name": "bin/st",
 		"include_dirs": [
 			"include",
-			"/usr/X11R6/include",
 			"/usr/include/freetype2",
 			"/usr/include/libpng16",
 			"/usr/include/harfbuzz",

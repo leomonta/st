@@ -1,23 +1,25 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 #include <X11/Xft/Xft.h>
-#include <hb.h>
 #include <hb-ft.h>
+#include <hb.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+// st.h should be included after Xft.h
 #include "st.h"
 
-#define FEATURE(c1,c2,c3,c4) { .tag = HB_TAG(c1,c2,c3,c4), .value = 1, .start = HB_FEATURE_GLOBAL_START, .end = HB_FEATURE_GLOBAL_END }
+#define FEATURE(c1, c2, c3, c4) \
+	{ .tag = HB_TAG(c1, c2, c3, c4), .value = 1, .start = HB_FEATURE_GLOBAL_START, .end = HB_FEATURE_GLOBAL_END }
 
-void hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length);
+void       hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length);
 hb_font_t *hbfindfont(XftFont *match);
 
 typedef struct {
-	XftFont *match;
+	XftFont   *match;
 	hb_font_t *font;
 } HbFontMatch;
 
-static int hbfontslen = 0;
+static int          hbfontslen  = 0;
 static HbFontMatch *hbfontcache = NULL;
 
 /*
@@ -25,11 +27,9 @@ static HbFontMatch *hbfontcache = NULL;
  * e. g.
  * FEATURE('c', 'a', 'l', 't'), FEATURE('d', 'l', 'i', 'g')
  */
-hb_feature_t features[] = { FEATURE('o', 'p', 'b', 'd')};
+hb_feature_t features[] = {FEATURE('o', 'p', 'b', 'd')};
 
-void
-hbunloadfonts()
-{
+void hbunloadfonts() {
 	for (int i = 0; i < hbfontslen; i++) {
 		hb_font_destroy(hbfontcache[i].font);
 		XftUnlockFace(hbfontcache[i].match);
@@ -43,31 +43,28 @@ hbunloadfonts()
 }
 
 hb_font_t *
-hbfindfont(XftFont *match)
-{
+hbfindfont(XftFont *match) {
 	for (int i = 0; i < hbfontslen; i++) {
 		if (hbfontcache[i].match == match)
 			return hbfontcache[i].font;
 	}
 
 	/* Font not found in cache, caching it now. */
-	hbfontcache = realloc(hbfontcache, sizeof(HbFontMatch) * (hbfontslen + 1));
-	FT_Face face = XftLockFace(match);
+	hbfontcache     = realloc(hbfontcache, sizeof(HbFontMatch) * (hbfontslen + 1));
+	FT_Face    face = XftLockFace(match);
 	hb_font_t *font = hb_ft_font_create(face, NULL);
 	if (font == NULL)
 		die("Failed to load Harfbuzz font.");
 
 	hbfontcache[hbfontslen].match = match;
-	hbfontcache[hbfontslen].font = font;
+	hbfontcache[hbfontslen].font  = font;
 	hbfontslen += 1;
 
 	return font;
 }
 
-void
-hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int y)
-{
-	int start = 0, length = 1, gstart = 0;
+void hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int y) {
+	int             start = 0, length = 1, gstart = 0;
 	hb_codepoint_t *codepoints = calloc((unsigned int)len, sizeof(hb_codepoint_t));
 
 	for (int idx = 1, specidx = 1; idx < len; idx++) {
@@ -81,7 +78,7 @@ hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int
 
 			/* Reset the sequence. */
 			length = 1;
-			start = specidx;
+			start  = specidx;
 			gstart = idx;
 		} else {
 			length += 1;
@@ -107,20 +104,18 @@ hbtransform(XftGlyphFontSpec *specs, const Glyph *glyphs, size_t len, int x, int
 	free(codepoints);
 }
 
-void
-hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length)
-{
+void hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoints, int start, int length) {
 	hb_font_t *font = hbfindfont(xfont);
 	if (font == NULL)
 		return;
 
-	Rune rune;
-	ushort mode = USHRT_MAX;
+	Rune         rune;
+	ushort       mode   = USHRT_MAX;
 	hb_buffer_t *buffer = hb_buffer_create();
 	hb_buffer_set_direction(buffer, HB_DIRECTION_LTR);
 
 	/* Fill buffer with codepoints. */
-	for (int i = start; i < (start+length); i++) {
+	for (int i = start; i < (start + length); i++) {
 		rune = string[i].u;
 		mode = string[i].mode;
 		if (mode & ATTR_WDUMMY)
@@ -129,15 +124,15 @@ hbtransformsegment(XftFont *xfont, const Glyph *string, hb_codepoint_t *codepoin
 	}
 
 	/* Shape the segment. */
-	hb_shape(font, buffer, features, sizeof(features)/sizeof(hb_feature_t));
+	hb_shape(font, buffer, features, sizeof(features) / sizeof(hb_feature_t));
 
 	/* Get new glyph info. */
 	hb_glyph_info_t *info = hb_buffer_get_glyph_infos(buffer, NULL);
 
 	/* Write new codepoints. */
 	for (int i = 0; i < length; i++) {
-		hb_codepoint_t gid = info[i].codepoint;
-		codepoints[start+i] = gid;
+		hb_codepoint_t gid    = info[i].codepoint;
+		codepoints[start + i] = gid;
 	}
 
 	/* Cleanup. */

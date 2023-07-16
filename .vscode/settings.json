@@ -112,7 +112,24 @@
 		"config.h": "c",
 		"math.h": "c",
 		"utils.h": "c",
-		"*.inc": "cpp"
+		"*.inc": "cpp",
+		"st.h": "c",
+		"stdint.h": "c",
+		"termios.h": "c",
+		"win.h": "c",
+		"wchar.h": "c",
+		"types.h": "c",
+		"xft.h": "c",
+		"hb-ft.h": "c",
+		"hb.h": "c",
+		"stdlib.h": "c",
+		"stddef.h": "c",
+		"features.h": "c",
+		"xrender.h": "c",
+		"xftcompat.h": "c",
+		"xfuncproto.h": "c",
+		"render.h": "c",
+		"xmd.h": "c"
 	},
 	"python.formatting.provider": "yapf"
 }

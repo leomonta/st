@@ -4,7 +4,6 @@
 			"name": "g++64",
 			"includePath": [
 				"include",
-				"/usr/X11R6/include",
 				"/usr/include/freetype2",
 				"/usr/include/libpng16",
 				"/usr/include/harfbuzz",
