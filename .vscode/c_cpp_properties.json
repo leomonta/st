@@ -9,7 +9,8 @@
 				"/usr/include/harfbuzz",
 				"/usr/include/glib-2.0",
 				"/usr/lib/glib-2.0/include",
-				"/usr/include/sysprof-4"
+				"/usr/include/sysprof-4",
+				"/usr/include/X11"
 			],
 			"compilerArgs": [
 				"-Wconversion",
@@ -21,12 +22,12 @@
 			"defines": [
 				"_DEBUG",
 				"UNICODE",
-				"_UNICODE",
+				"_UNICODE"
 			],
 			"windowsSdkVersion": "10.0.18362.0",
 			"compilerPath": "/usr/bin/gcc",
-			"cStandard": "c11",
-			"cppStandard": "c++20",
+			"cStandard": "c17",
+			"cppStandard": "c++17",
 			"intelliSenseMode": "linux-gcc-x64"
 		}
 	],

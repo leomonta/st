@@ -129,7 +129,11 @@
 		"xftcompat.h": "c",
 		"xfuncproto.h": "c",
 		"render.h": "c",
-		"xmd.h": "c"
+		"xmd.h": "c",
+		"select.h": "c",
+		"time.h": "c",
+		"cursorfont.h": "c",
+		"unistd.h": "c"
 	},
 	"python.formatting.provider": "yapf"
 }
