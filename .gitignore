@@ -2,4 +2,4 @@
 *.orig
 *.o
 files_hash.txt
-
+bin/*
