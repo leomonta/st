@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo cpp_builder.py -o -a
+sudo cpp_builder.py -a -p release

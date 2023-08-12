@@ -27,7 +27,7 @@ static HbFontMatch *hbfontcache = NULL;
  * e. g.
  * FEATURE('c', 'a', 'l', 't'), FEATURE('d', 'l', 'i', 'g')
  */
-hb_feature_t features[] = {FEATURE('o', 'p', 'b', 'd')};
+hb_feature_t features[] = {FEATURE('o', 'p', 'b', 'd'), FEATURE('c', 'v', '0', '2'), FEATURE('s', 's', '0', '5'), FEATURE('s', 's', '0', '3')};
 
 void hbunloadfonts() {
 	for (int i = 0; i < hbfontslen; i++) {

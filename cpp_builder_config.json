@@ -1,7 +1,5 @@
 {
 	"scripts": {
-		"pre": "clean_and_setup.sh",
-		"post": "install.sh"
 	},
 	"compiler": {
 		"compiler_style": "gcc",
@@ -53,6 +51,15 @@
 		"libraries_dirs": [
 		],
 		"libraries_names": [
+			"m",
+			"rt",
+			"X11",
+			"util",
+			"Xft",
+			"Xrender",
+			"fontconfig",
+			"freetype",
+			"harfbuzz"
 		]
 	}
 }
