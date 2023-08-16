@@ -1,5 +1,5 @@
 *.rej
 *.orig
 *.o
-files_hash.txt
+files_hash
 bin/*
