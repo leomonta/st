@@ -2,6 +2,8 @@
 
 My own variant of the ST  
 
+---
+
 ## Official patches applied
 
 ### alpha.diff
@@ -32,6 +34,12 @@ Enables scrollback
 ### Scrollback_mouse.diff
 
 Makes the scrollback usabe with mouse and trackpad gestures
+
+### netwmicon.diff
+
+Shows the `st` icon when alt tabbing and other, mainly alt tabbing
+
+---
 
 ## My Patches
 

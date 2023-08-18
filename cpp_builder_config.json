@@ -28,7 +28,7 @@
 	},
 
 	"debug": {
-		"compiler_args": "-g3 -DVERSION=\"0.9LM_d\" -DICON=\"/usr/local/share/pixmaps/st.png\" -Wno-missing-field-initializers -Wno-unknown-pragmas -Wall -Wconversion -Wshadow -Wextra -fsanitize=address -fsanitize=leak",
+		"compiler_args": "-g3 -DVERSION=\"0.9.1-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wno-missing-field-initializers -Wno-unknown-pragmas -Wall -Wconversion -Wshadow -Wextra -fsanitize=address -fsanitize=leak",
 		"linker_args": "-fsanitize=address -fsanitize=leak",
 		"libraries_dirs": [
 			"/usr/X11R6/lib"
@@ -49,7 +49,7 @@
 	},
 
 	"release": {
-		"compiler_args": "-g3 -DVERSION=\"0.9LM\" -DICON=\"/usr/local/share/pixmaps/st.png\" -D_XOPEN_SOURCE=600 -Ofast",
+		"compiler_args": "-DVERSION=\"0.9.1-LM\" -DICON=\"/usr/share/icons/st.png\" -D_XOPEN_SOURCE=600 -Ofast",
 		"linker_args": "",
 		"libraries_dirs": [
 		],
