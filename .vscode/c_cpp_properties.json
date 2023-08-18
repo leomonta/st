@@ -22,6 +22,8 @@
 			"defines": [
 				"_DEBUG",
 				"UNICODE",
+				"VER=0.9LM",
+				"ICON=\"/usr/local/share/pixmaps/st.png\"",
 				"_UNICODE"
 			],
 			"windowsSdkVersion": "10.0.18362.0",
