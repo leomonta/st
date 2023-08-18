@@ -26,6 +26,8 @@ static HbFontMatch *hbfontcache = NULL;
  * Poplulate the array with a list of font features, wrapped in FEATURE macro,
  * e. g.
  * FEATURE('c', 'a', 'l', 't'), FEATURE('d', 'l', 'i', 'g')
+ * 
+ * These are fira code character variants
  */
 hb_feature_t features[] = {FEATURE('o', 'p', 'b', 'd'), FEATURE('c', 'v', '0', '2'), FEATURE('s', 's', '0', '5'), FEATURE('s', 's', '0', '3')};
 

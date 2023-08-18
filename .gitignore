@@ -3,3 +3,5 @@
 *.o
 files_hash
 bin/*
+curr/
+obj/
