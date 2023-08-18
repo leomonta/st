@@ -28,7 +28,7 @@
 	},
 
 	"debug": {
-		"compiler_args": "-g3 -Wno-missing-field-initializers -Wno-unknown-pragmas -Wall -Wconversion -Wshadow -Wextra -fsanitize=address -fsanitize=leak",
+		"compiler_args": "-g3 -DVERSION=\"0.9LM_d\" -Wno-missing-field-initializers -Wno-unknown-pragmas -Wall -Wconversion -Wshadow -Wextra -fsanitize=address -fsanitize=leak",
 		"linker_args": "-fsanitize=address -fsanitize=leak",
 		"libraries_dirs": [
 			"/usr/X11R6/lib"
@@ -48,7 +48,7 @@
 	},
 
 	"release": {
-		"compiler_args": "-DVER=0.9 -D_XOPEN_SOURCE=600 -Ofast",
+		"compiler_args": "-DVERSION=\"0.9LM\" -D_XOPEN_SOURCE=600 -Ofast",
 		"linker_args": "-g",
 		"libraries_dirs": [
 		],

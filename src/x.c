@@ -21,8 +21,9 @@ char *argv0;
 // hhb.h should be included after st.h
 #include "hhb.h"
 #include "win.h"
-#define str(a)  #a
-#define VERSION str(VER)
+#ifndef VERSION
+#	define VERSION "0.0t"
+#endif
 
 /* types used in config.h */
 typedef struct {
