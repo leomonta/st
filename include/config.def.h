@@ -35,8 +35,12 @@ static float chscale = 1.0;
  * word delimiter string
  *
  * More advanced example: L" `'\"()[]{}"
+ * space 
+ * all quotes
+ * all brackets
+ * the · is for nvim space visualization
  */
-wchar_t *worddelimiters = L" `'\"()[]{";
+wchar_t *worddelimiters = L" `'\"()[]{·";
 
 /* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
