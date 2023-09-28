@@ -1,0 +1,96 @@
+diff --git a/curr/st.h b/other/st.h
+index fd3b0d8..f36e16a 100644
+--- a/curr/st.h
++++ b/other/st.h
+@@ -3,22 +3,26 @@
+ #include <stdint.h>
+ #include <sys/types.h>
+ 
++/* Arbitrary sizes */
++#define UTF_SIZ       4
++#define ESC_BUF_SIZ   (128*UTF_SIZ)
++
+ /* macros */
+-#define MIN(a, b)		((a) < (b) ? (a) : (b))
+-#define MAX(a, b)		((a) < (b) ? (b) : (a))
+-#define LEN(a)			(sizeof(a) / sizeof(a)[0])
+-#define BETWEEN(x, a, b)	((a) <= (x) && (x) <= (b))
+-#define DIVCEIL(n, d)		(((n) + ((d) - 1)) / (d))
+-#define DEFAULT(a, b)		(a) = (a) ? (a) : (b)
+-#define LIMIT(x, a, b)		(x) = (x) < (a) ? (a) : (x) > (b) ? (b) : (x)
+-#define ATTRCMP(a, b)		((a).mode != (b).mode || (a).fg != (b).fg || \
+-				(a).bg != (b).bg)
+-#define TIMEDIFF(t1, t2)	((t1.tv_sec-t2.tv_sec)*1000 + \
+-				(t1.tv_nsec-t2.tv_nsec)/1E6)
+-#define MODBIT(x, set, bit)	((set) ? ((x) |= (bit)) : ((x) &= ~(bit)))
+-
+-#define TRUECOLOR(r,g,b)	(1 << 24 | (r) << 16 | (g) << 8 | (b))
+-#define IS_TRUECOL(x)		(1 << 24 & (x))
++#define MIN(a, b)       ((a) < (b) ? (a) : (b))
++#define MAX(a, b)       ((a) < (b) ? (b) : (a))
++#define LEN(a)          (sizeof(a) / sizeof(a)[0])
++#define BETWEEN(x, a, b)    ((a) <= (x) && (x) <= (b))
++#define DIVCEIL(n, d)       (((n) + ((d) - 1)) / (d))
++#define DEFAULT(a, b)       (a) = (a) ? (a) : (b)
++#define LIMIT(x, a, b)      (x) = (x) < (a) ? (a) : (x) > (b) ? (b) : (x)
++#define ATTRCMP(a, b)       ((a).mode != (b).mode || (a).fg != (b).fg || \
++		(a).bg != (b).bg)
++#define TIMEDIFF(t1, t2)    ((t1.tv_sec-t2.tv_sec)*1000 + \
++		(t1.tv_nsec-t2.tv_nsec)/1E6)
++#define MODBIT(x, set, bit) ((set) ? ((x) |= (bit)) : ((x) &= ~(bit)))
++
++#define TRUECOLOR(r,g,b)    (1 << 24 | (r) << 16 | (g) << 8 | (b))
++#define IS_TRUECOL(x)       (1 << 24 & (x))
+ 
+ enum glyph_attribute {
+ 	ATTR_NULL       = 0,
+@@ -59,7 +63,6 @@ typedef unsigned short ushort;
+ 
+ typedef uint_least32_t Rune;
+ 
+-#define Glyph Glyph_
+ typedef struct {
+ 	Rune u;           /* character code */
+ 	ushort mode;      /* attribute flags */
+@@ -74,7 +77,6 @@ typedef union {
+ 	uint ui;
+ 	float f;
+ 	const void *v;
+-	const char *s;
+ } Arg;
+ 
+ void die(const char *, ...);
+@@ -91,7 +93,7 @@ void tnew(int, int);
+ void tresize(int, int);
+ void tsetdirtattr(int);
+ void ttyhangup(void);
+-int ttynew(const char *, char *, const char *, char **);
++int ttynew(char *, char *, char *, char **);
+ size_t ttyread(void);
+ void ttyresize(int, int);
+ void ttywrite(const char *, size_t, int);
+@@ -105,22 +107,20 @@ void selextend(int, int, int, int);
+ int selected(int, int);
+ char *getsel(void);
+ 
++size_t utf8decode(const char *, Rune *, size_t);
+ size_t utf8encode(Rune, char *);
+ 
+ void *xmalloc(size_t);
+ void *xrealloc(void *, size_t);
+-char *xstrdup(const char *);
++char *xstrdup(char *);
+ 
+ /* config.h globals */
+ extern char *utmp;
+-extern char *scroll;
+ extern char *stty_args;
+ extern char *vtiden;
+ extern wchar_t *worddelimiters;
+ extern int allowaltscreen;
+-extern int allowwindowops;
+ extern char *termname;
+ extern unsigned int tabspaces;
+ extern unsigned int defaultfg;
+ extern unsigned int defaultbg;
+-extern unsigned int defaultcs;
