@@ -1,0 +1,18 @@
+diff --git a/curr/win.h b/other/win.h
+index 674510f..1565d8f 100644
+--- a/curr/win.h
++++ b/other/win.h
+@@ -29,12 +29,10 @@ void xdrawline(Line, int, int, int);
+ void xfinishdraw(void);
+ void xloadcols(void);
+ int  xsetcolorname(int, const char *);
+-int  xgetcolor(int, unsigned char *, unsigned char *, unsigned char *);
+-void xseticontitle(char *);
+ void xsettitle(char *);
+ int  xsetcursor(int);
+ void xsetmode(int, unsigned int);
+ void xsetpointermotion(int);
+ void xsetsel(char *);
+ int  xstartdraw(void);
+-void xximspot(int, int);
++void wlneeddraw(void);
