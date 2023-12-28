@@ -2242,6 +2242,7 @@ int eschandle(uchar ascii) {
 		treset();
 		resettitle();
 		xloadcols();
+		xsetmode(0, MODE_HIDE);
 		break;
 	case '=': /* DECPAM -- Application keypad */
 		xsetmode(1, MODE_APPKEYPAD);
@@ -2386,7 +2387,11 @@ check_control_code:
 	}
 
 	if (term.c.x + width > term.col) {
-		tnewline(1);
+		if (IS_SET(MODE_WRAP)) {
+			tnewline(1);
+		} else {
+			tmoveto(term.col - width, term.c.y);
+		}
 		gp = &term.line[term.c.y][term.c.x];
 	}
 

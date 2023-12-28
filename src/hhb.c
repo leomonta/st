@@ -1,7 +1,6 @@
 #include <X11/Xft/Xft.h>
 #include <hb-ft.h>
 #include <hb.h>
-#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,7 +25,7 @@ static HbFontMatch *hbfontcache = NULL;
  * Poplulate the array with a list of font features, wrapped in FEATURE macro,
  * e. g.
  * FEATURE('c', 'a', 'l', 't'), FEATURE('d', 'l', 'i', 'g')
- * 
+ *
  * These are fira code character variants
  */
 hb_feature_t features[] = {FEATURE('o', 'p', 'b', 'd'), FEATURE('c', 'v', '0', '2'), FEATURE('s', 's', '0', '5'), FEATURE('s', 's', '0', '3')};
@@ -44,8 +43,7 @@ void hbunloadfonts() {
 	hbfontslen = 0;
 }
 
-hb_font_t *
-hbfindfont(XftFont *match) {
+hb_font_t *hbfindfont(XftFont *match) {
 	for (int i = 0; i < hbfontslen; i++) {
 		if (hbfontcache[i].match == match)
 			return hbfontcache[i].font;

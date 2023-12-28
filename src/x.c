@@ -10,7 +10,6 @@
 #include <limits.h>
 #include <locale.h>
 #include <math.h>
-#include <signal.h>
 #include <sys/select.h>
 #include <time.h>
 #include <unistd.h>
@@ -27,16 +26,16 @@ char *argv0;
 
 /* types used in config.h */
 typedef struct {
-	uint   mod;
-	KeySym keysym;
-	void (*func)(const Arg *);
+	uint      mod;
+	KeySym    keysym;
+	void      (*func)(const Arg *);
 	const Arg arg;
 } Shortcut;
 
 typedef struct {
-	uint mod;
-	uint button;
-	void (*func)(const Arg *);
+	uint      mod;
+	uint      button;
+	void      (*func)(const Arg *);
 	const Arg arg;
 	uint      release;
 } MouseShortcut;
@@ -82,9 +81,9 @@ static void ttysend(const Arg *);
 
 /* macros */
 #define IS_SET(flag) ((win.mode & (flag)) != 0)
-#define TRUERED(x)   (((x)&0xff0000) >> 8)
-#define TRUEGREEN(x) (((x)&0xff00))
-#define TRUEBLUE(x)  (((x)&0xff) << 8)
+#define TRUERED(x)   (((x) & 0xff0000) >> 8)
+#define TRUEGREEN(x) (((x) & 0xff00))
+#define TRUEBLUE(x)  (((x) & 0xff) << 8)
 
 typedef XftDraw         *Draw;
 typedef XftColor         Color;
@@ -797,8 +796,9 @@ void xloadcols(void) {
 }
 
 int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b) {
-	if (!BETWEEN(x, 0, dc.collen))
+	if (!BETWEEN(x, 0, dc.collen - 1)) {
 		return 1;
+	}
 
 	*r = dc.col[x].color.red >> 8;
 	*g = dc.col[x].color.green >> 8;
@@ -810,11 +810,13 @@ int xgetcolor(int x, unsigned char *r, unsigned char *g, unsigned char *b) {
 int xsetcolorname(int x, const char *name) {
 	Color ncolor;
 
-	if (!BETWEEN(x, 0, dc.collen))
+	if (!BETWEEN(x, 0, dc.collen - 1)) {
 		return 1;
+	}
 
-	if (!xloadcolor(x, name, &ncolor))
+	if (!xloadcolor(x, name, &ncolor)) {
 		return 1;
+	}
 
 	XftColorFree(xw.dpy, xw.vis, xw.cmap, &dc.col[x]);
 	dc.col[x] = ncolor;
@@ -1376,7 +1378,7 @@ int xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, i
 	}
 
 	/* Harfbuzz transformation for ligatures. */
-	hbtransform(specs, glyphs, len, x, y);
+	// hbtransform(specs, glyphs, len, x, y);
 
 	return numspecs;
 }
