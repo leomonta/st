@@ -6,3 +6,4 @@ bin/*
 curr/
 other/
 obj/
+compile_commands.json
