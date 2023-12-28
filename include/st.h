@@ -1,5 +1,7 @@
 /* See LICENSE for license details. */
 
+#pragma once
+
 #include <gd.h>
 #include <stdint.h>
 #include <sys/types.h>
@@ -118,6 +120,16 @@ size_t utf8encode(Rune, char *);
 void *xmalloc(size_t);
 void *xrealloc(void *, size_t);
 char *xstrdup(const char *);
+
+/* used in config.h */
+static void clipcopy(const Arg *);
+static void clippaste(const Arg *);
+static void numlock(const Arg *);
+static void selpaste(const Arg *);
+static void zoom(const Arg *);
+static void zoomabs(const Arg *);
+static void zoomreset(const Arg *);
+static void ttysend(const Arg *);
 
 /* config.h globals */
 extern char        *utmp;

@@ -1,5 +1,6 @@
 {
 	"scripts": {
+		"pre": "setup.sh"
 	},
 	"compiler": {
 		"compiler_style": "gcc",
@@ -26,7 +27,7 @@
 	},
 
 	"debug": {
-		"compiler_args": "-g3 -DVERSION=\"0.9.1-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wno-missing-field-initializers -Wno-unknown-pragmas -Wall -Wconversion -Wshadow -Wextra -fsanitize=address -fsanitize=leak",
+		"compiler_args": "-g3 -DVERSION=\"0.9.1-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wall -Wextra -Wno-missing-field-initializers -Wconversion -Wshadow -fsanitize=address -fsanitize=leak",
 		"linker_args": "-fsanitize=address -fsanitize=leak",
 		"libraries_dirs": [
 			"/usr/X11R6/lib"

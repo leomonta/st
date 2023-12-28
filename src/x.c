@@ -4,10 +4,8 @@
 #include <X11/Xft/Xft.h>
 #include <X11/Xlib.h>
 #include <X11/cursorfont.h>
-#include <X11/keysym.h>
 #include <errno.h>
 #include <libgen.h>
-#include <limits.h>
 #include <locale.h>
 #include <math.h>
 #include <sys/select.h>
@@ -23,54 +21,6 @@ char *argv0;
 #ifndef VERSION
 #	define VERSION "0.0t"
 #endif
-
-/* types used in config.h */
-typedef struct {
-	uint      mod;
-	KeySym    keysym;
-	void      (*func)(const Arg *);
-	const Arg arg;
-} Shortcut;
-
-typedef struct {
-	uint      mod;
-	uint      button;
-	void      (*func)(const Arg *);
-	const Arg arg;
-	uint      release;
-} MouseShortcut;
-
-typedef struct {
-	KeySym k;
-	uint   mask;
-	char  *s;
-	/* three-valued logic variables: 0 indifferent, 1 on, -1 off */
-	signed char appkey;    /* application keypad */
-	signed char appcursor; /* application cursor */
-} Key;
-
-typedef struct {
-	unsigned long flags;
-	unsigned long functions;
-	unsigned long decorations;
-	long          inputMode;
-	unsigned long status;
-} Hints;
-
-/* X modifiers */
-#define XK_ANY_MOD    UINT_MAX
-#define XK_NO_MOD     0
-#define XK_SWITCH_MOD (1 << 13 | 1 << 14)
-
-/* function definitions used in config.h */
-static void clipcopy(const Arg *);
-static void clippaste(const Arg *);
-static void numlock(const Arg *);
-static void selpaste(const Arg *);
-static void zoom(const Arg *);
-static void zoomabs(const Arg *);
-static void zoomreset(const Arg *);
-static void ttysend(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"

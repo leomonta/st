@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm bin/st
 cp -f bin/st /usr/local/bin/
 chmod 755 /usr/local/bin/st
 sed "s/VERSION/0.9.1-LM/g" < st.1 > /usr/local/share/man/man1/st.1

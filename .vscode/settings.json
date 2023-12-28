@@ -133,7 +133,12 @@
 		"select.h": "c",
 		"time.h": "c",
 		"cursorfont.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"wait.h": "c",
+		"ioctl.h": "c",
+		"string.h": "c",
+		"stdarg.h": "c",
+		"keysym.h": "c"
 	},
 	"python.formatting.provider": "yapf"
 }
