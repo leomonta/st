@@ -1,7 +1,4 @@
 {
-	"scripts": {
-		"pre": "setup.sh"
-	},
 	"compiler": {
 		"compiler_style": "gcc",
 		"compiler_exe": "gcc",
@@ -26,12 +23,7 @@
 		"temp_dir": "obj"
 	},
 
-	"debug": {
-		"compiler_args": "-g3 -DVERSION=\"0.9.1-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wall -Wextra -Wno-missing-field-initializers -Wconversion -Wshadow -fsanitize=address -fsanitize=leak",
-		"linker_args": "-fsanitize=address -fsanitize=leak",
-		"libraries_dirs": [
-			"/usr/X11R6/lib"
-		],
+	"default" :{
 		"libraries_names": [
 			"m",
 			"rt",
@@ -43,26 +35,22 @@
 			"freetype",
 			"gd",
 			"harfbuzz"
-		]
+		],
+		"scripts": {
+			"pre": "setup.sh"
+		}
+	},
 
+	"debug": {
+		"compiler_args": "-g3 -Og -DVERSION=\"0.9.1-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wall -Wextra -Wno-missing-field-initializers -Wconversion -Wshadow -fsanitize=address -fsanitize=leak -fanalyzer",
+		"linker_args": "-fsanitize=address -fsanitize=leak"
 	},
 
 	"release": {
 		"compiler_args": "-DVERSION=\"0.9.1-LM\" -DICON=\"/usr/share/icons/st.png\" -D_XOPEN_SOURCE=600 -Ofast",
-		"linker_args": "",
-		"libraries_dirs": [
-		],
-		"libraries_names": [
-			"m",
-			"rt",
-			"X11",
-			"util",
-			"Xft",
-			"Xrender",
-			"fontconfig",
-			"freetype",
-			"gd",
-			"harfbuzz"
-		]
+		"linker_args": "-flto",
+		"scripts": {
+			"post": "install.sh"
+		}
 	}
 }
