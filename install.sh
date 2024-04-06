@@ -2,7 +2,7 @@
 
 cp -f bin/st /usr/local/bin/
 sudo chmod 755 /usr/local/bin/st
-sudo sed "s/VERSION/0.9.1-LM/g" < st.1 > /usr/local/share/man/man1/st.1
+sudo sed "s/VERSION/0.9.2-LM/g" < st.1 > /usr/local/share/man/man1/st.1
 tic -sx st.info
 sudo cp -f st.png /usr/share/icons/st.png
 echo Please see the README file regarding the terminfo entry of st.
