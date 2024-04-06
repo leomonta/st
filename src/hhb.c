@@ -6,8 +6,9 @@
 #include <stdlib.h>
 
 // st.h should be included after Xft.h
-#include "hhb.h"
 #include "st.h"
+// hhb after st.h
+#include "hhb.h"
 
 #define FEATURE(c1, c2, c3, c4) \
 	{ .tag = HB_TAG(c1, c2, c3, c4), .value = 1, .start = HB_FEATURE_GLOBAL_START, .end = HB_FEATURE_GLOBAL_END }

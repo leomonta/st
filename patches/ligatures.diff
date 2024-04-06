@@ -542,9 +542,9 @@ index 27e81d1..5e11c1f 100644
 -			glyphidx = XftCharIndex(xw.dpy, frc[frclen].font, rune);
 -
 -			f = frclen;
--			frclen++;
 -
 -			FcPatternDestroy(fcpattern);
+-			frclen++;
 -			FcCharSetDestroy(fccharset);
  		}
 -

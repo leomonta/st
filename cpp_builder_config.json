@@ -42,7 +42,7 @@
 	},
 
 	"debug": {
-		"compiler_args": "-g3 -Og -DVERSION=\"0.9.2-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wall -Wextra -Wno-missing-field-initializers -Wconversion -Wshadow -fsanitize=address -fsanitize=leak -fanalyzer",
+		"compiler_args": "-g3 -Og -DVERSION=\"0.9.2-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wno-missing-field-initializers -fsanitize=address -fsanitize=leak -fanalyzer",
 		"linker_args": "-fsanitize=address -fsanitize=leak"
 	},
 
