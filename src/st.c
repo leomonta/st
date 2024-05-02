@@ -46,7 +46,7 @@
 #define TLINE(y)       ((y) < term.scr ? term.hist[((y) + term.histi -   \
 	                                          term.scr + HISTSIZE + 1) % \
 	                                         HISTSIZE]                   \
-	                                   : term.line[(y)-term.scr])
+	                                   : term.line[(y) - term.scr])
 
 enum term_mode {
 	MODE_WRAP      = 1 << 0,
@@ -341,8 +341,7 @@ size_t
 utf8validate(Rune *u, size_t i) {
 	if (!BETWEEN(*u, utfmin[i], utfmax[i]) || BETWEEN(*u, 0xD800, 0xDFFF))
 		*u = UTF_INVALID;
-	for (i = 1; *u > utfmax[i]; ++i)
-		;
+	for (i = 1; *u > utfmax[i]; ++i);
 
 	return i;
 }
@@ -1108,6 +1107,7 @@ void tnewline(int first_col) {
 void csiparse(void) {
 	char    *p = csiescseq.buf, *np;
 	long int v;
+	int      sep = ';'; /* colon or semi-colon, but not both */
 
 	csiescseq.narg = 0;
 	if (*p == '?') {
@@ -1125,8 +1125,12 @@ void csiparse(void) {
 			v = -1;
 		csiescseq.arg[csiescseq.narg++] = v;
 		p                               = np;
-		if (*p != ';' || csiescseq.narg == ESC_ARG_SIZ)
+		if (sep == ';' && *p == ':') {
+			sep = ':'; /* allow override to colon once */
+		}
+		if (*p != sep || csiescseq.narg == ESC_ARG_SIZ) {
 			break;
+		}
 		p++;
 	}
 	csiescseq.mode[0] = *p++;
