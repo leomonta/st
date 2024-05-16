@@ -10,16 +10,16 @@
 #include <limits.h>
 
 typedef struct {
-	uint      mod;
-	KeySym    keysym;
-	void      (*func)(const Arg *);
+	uint   mod;
+	KeySym keysym;
+	void (*func)(const Arg *);
 	const Arg arg;
 } Shortcut;
 
 typedef struct {
-	uint      mod;
-	uint      button;
-	void      (*func)(const Arg *);
+	uint mod;
+	uint button;
+	void (*func)(const Arg *);
 	const Arg arg;
 	uint      release;
 } MouseShortcut;
@@ -229,7 +229,7 @@ static uint forcemousemod = ShiftMask;
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
-  /* mask                 button   function        argument       release */
+    /* mask                 button   function        argument       release */
     {XK_NO_MOD, Button4, kscrollup, {.i = 1}},
     {XK_NO_MOD, Button5, kscrolldown, {.i = 1}},
     {XK_ANY_MOD, Button2, selpaste, {.i = 0}, 1},
@@ -244,7 +244,7 @@ static MouseShortcut mshortcuts[] = {
 #define TERMMOD (ControlMask | ShiftMask)
 
 static Shortcut shortcuts[] = {
-  /* mask                 keysym          function        argument */
+    /* mask                 keysym          function        argument */
     {XK_ANY_MOD,  XK_Break,       sendbreak,     {.i = 0} },
     {ControlMask, XK_Print,       toggleprinter, {.i = 0} },
     {ShiftMask,   XK_Print,       printscreen,   {.i = 0} },
@@ -301,7 +301,7 @@ static uint ignoremod = Mod2Mask | XK_SWITCH_MOD;
  * world. Please decide about changes wisely.
  */
 static Key key[] = {
-  /* keysym           mask                                 string       appkey appcursor */
+    /* keysym           mask                                 string       appkey appcursor */
     {XK_KP_Home,      ShiftMask,                          "\033[2J",    0,  -1},
     {XK_KP_Home,      ShiftMask,                          "\033[1;2H",  0,  +1},
     {XK_KP_Home,      XK_ANY_MOD,                         "\033[H",     0,  -1},
@@ -338,7 +338,7 @@ static Key key[] = {
     {XK_KP_Delete,    ControlMask,                        "\033[3;5~",  +1, 0 },
     {XK_KP_Delete,    ShiftMask,                          "\033[2K",    -1, 0 },
     {XK_KP_Delete,    ShiftMask,                          "\033[3;2~",  +1, 0 },
-    {XK_KP_Delete,    XK_ANY_MOD,                         "\033[P",     -1, 0 },
+    {XK_KP_Delete,    XK_ANY_MOD,                         "\033[3~",    -1, 0 },
     {XK_KP_Delete,    XK_ANY_MOD,                         "\033[3~",    +1, 0 },
     {XK_KP_Multiply,  XK_ANY_MOD,                         "\033Oj",     +2, 0 },
     {XK_KP_Add,       XK_ANY_MOD,                         "\033Ok",     +2, 0 },
@@ -406,7 +406,7 @@ static Key key[] = {
     {XK_Delete,       ControlMask,                        "\033[3;5~",  +1, 0 },
     {XK_Delete,       ShiftMask,                          "\033[2K",    -1, 0 },
     {XK_Delete,       ShiftMask,                          "\033[3;2~",  +1, 0 },
-    {XK_Delete,       XK_ANY_MOD,                         "\033[P",     -1, 0 },
+    {XK_Delete,       XK_ANY_MOD,                         "\033[3~",    -1, 0 },
     {XK_Delete,       XK_ANY_MOD,                         "\033[3~",    +1, 0 },
     {XK_BackSpace,    XK_NO_MOD,                          "\177",       0,  0 },
     {XK_BackSpace,    Mod1Mask,                           "\033\177",   0,  0 },
