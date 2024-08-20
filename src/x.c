@@ -322,8 +322,7 @@ void mousereport(XEvent *e) {
 			return;
 		/* Set btn to lowest-numbered pressed button, or 12 if no
 		 * buttons are pressed. */
-		for (btn = 1; btn <= 11 && !(buttons & (1 << (btn - 1))); btn++)
-			;
+		for (btn = 1; btn <= 11 && !(buttons & (1 << (btn - 1))); btn++);
 		code = 32;
 	} else {
 		btn = e->xbutton.button;
@@ -1043,6 +1042,7 @@ void xinit(int cols, int rows) {
 	XGCValues         gcvalues;
 	Cursor            cursor;
 	Window            parent;
+	Window            root;
 	pid_t             thispid = getpid();
 	XColor            xmousefg, xmousebg;
 	XWindowAttributes attr;
@@ -1052,11 +1052,12 @@ void xinit(int cols, int rows) {
 		die("can't open display\n");
 	xw.scr = XDefaultScreen(xw.dpy);
 
+	root = XRootWindow(xw.dpy, xw.scr);
 	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0)))) {
-		parent   = XRootWindow(xw.dpy, xw.scr);
+		parent   = root;
 		xw.depth = 32;
 	} else {
-		XGetWindowAttributes(xw.dpy, parent, &attr);
+		XGetWindowAttributes(xw.dpy, root, &attr);
 		xw.depth = attr.depth;
 	}
 
@@ -1089,9 +1090,12 @@ void xinit(int cols, int rows) {
 	xw.attrs.event_mask       = FocusChangeMask | KeyPressMask | KeyReleaseMask | ExposureMask | VisibilityChangeMask | StructureNotifyMask | ButtonMotionMask | ButtonPressMask | ButtonReleaseMask;
 	xw.attrs.colormap         = xw.cmap;
 
-	xw.win = XCreateWindow(xw.dpy, parent, xw.l, xw.t,
+	xw.win = XCreateWindow(xw.dpy, root, xw.l, xw.t,
 	                       win.w, win.h, 0, xw.depth, InputOutput,
 	                       xw.vis, CWBackPixel | CWBorderPixel | CWBitGravity | CWEventMask | CWColormap, &xw.attrs);
+	if (parent != root) {
+		XReparentWindow(xw.dpy, xw.win, parent, xw.l, xw.t);
+	}
 
 	memset(&gcvalues, 0, sizeof(gcvalues));
 	gcvalues.graphics_exposures = False;
