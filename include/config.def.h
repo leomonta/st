@@ -60,7 +60,7 @@ static int borderpx = 2;
  * 3: SHELL environment variable
  * 4: value of shell in /etc/passwd
  */
-static char *shell = "/usr/local/bin/start_fish";
+static char *shell = "/usr/local/bin/start_tmux";
 char        *utmp  = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll       = NULL;
