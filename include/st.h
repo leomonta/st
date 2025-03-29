@@ -5,6 +5,7 @@
 #include <gd.h>
 #include <stdint.h>
 #include <sys/types.h>
+#define __USE_XOPEN
 #include <wchar.h>
 
 /* macros */
@@ -12,10 +13,10 @@
 #define MAX(a, b)        ((a) < (b) ? (b) : (a))
 #define LEN(a)           (sizeof(a) / sizeof(a)[0])
 #define BETWEEN(x, a, b) ((a) <= (x) && (x) <= (b))
-#define DIVCEIL(n, d)    (((n) + ((d)-1)) / (d))
+#define DIVCEIL(n, d)    (((n) + ((d) - 1)) / (d))
 #define DEFAULT(a, b)    (a) = (a) ? (a) : (b)
-#define LIMIT(x, a, b)   (x) = (x) < (a) ? (a) : (x) > (b) ? (b) \
-	                                                       : (x)
+#define LIMIT(x, a, b)   (x) = (x)<(a) ? (a) : (x)>(b) ? (b) \
+	                                                   : (x)
 #define ATTRCMP(a, b) (((a).mode & (~ATTR_WRAP)) != ((b).mode & (~ATTR_WRAP)) || \
 	                   (a).fg != (b).fg ||                                       \
 	                   (a).bg != (b).bg)
@@ -41,6 +42,12 @@ enum glyph_attribute {
 	ATTR_WDUMMY     = 1 << 10,
 	ATTR_LIGA       = 1 << 11,
 	ATTR_BOLD_FAINT = ATTR_BOLD | ATTR_FAINT,
+};
+
+enum drawing_mode {
+	DRAW_NONE = 0,
+	DRAW_BG   = 1 << 0,
+	DRAW_FG   = 1 << 1,
 };
 
 enum selection_mode {

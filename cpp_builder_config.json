@@ -42,12 +42,12 @@
 	},
 
 	"debug": {
-		"compiler_args": "-g3 -Og -DVERSION=\"0.9.2-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wno-missing-field-initializers -fsanitize=address -fsanitize=leak -fanalyzer",
+		"compiler_args": "-g3 -Og -DVERSION=\"0.9.3-LM-debug\" -DICON=\"/usr/share/icons/st.png\" -Wno-missing-field-initializers -fsanitize=address -fsanitize=leak -fanalyzer",
 		"linker_args": "-fsanitize=address -fsanitize=leak"
 	},
 
 	"release": {
-		"compiler_args": "-DVERSION=\"0.9.2-LM\" -DICON=\"/usr/share/icons/st.png\" -D_XOPEN_SOURCE=600 -Ofast",
+		"compiler_args": "-DVERSION=\"0.9.3-LM\" -DICON=\"/usr/share/icons/st.png\" -D_XOPEN_SOURCE=600 -Ofast",
 		"linker_args": "-flto",
 		"scripts": {
 			"post": "install.sh"
